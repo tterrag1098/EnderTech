@@ -1,8 +1,12 @@
 package zephraph.endertech;
 
+import java.util.logging.Logger;
+
 import zephraph.endertech.config.ConfigHandler;
 import zephraph.endertech.core.proxy.CommonProxy;
+import zephraph.endertech.data.Blocks;
 import zephraph.endertech.data.ModInfo;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -24,14 +28,22 @@ public class EnderTech {
 	@SidedProxy(clientSide = ModInfo.client_proxy, serverSide = ModInfo.common_proxy)
 	public static CommonProxy proxy;
 	
+	public static Logger log;
+	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		log = Logger.getLogger(ModInfo.id);
+		log.setParent(FMLLog.getLogger());
+		
 		ConfigHandler.init(event.getSuggestedConfigurationFile());
+		
+		for(Blocks block : Blocks.values())
+			block.init();
 	}
 	
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		proxy.registerRenderers();
+		proxy.load();
 	}
 	
 	@EventHandler
