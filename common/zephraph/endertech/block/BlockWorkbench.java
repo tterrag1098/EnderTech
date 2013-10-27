@@ -1,10 +1,10 @@
 package zephraph.endertech.block;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import zephraph.endertech.data.Blocks;
 import zephraph.endertech.tileentity.TileWorkbench;
@@ -27,6 +27,11 @@ public class BlockWorkbench extends BaseBlock {
 	@Override
 	public int getRenderType() {
 		return -1;
+	}
+	
+	@Override
+	public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int x, int y, int z, int side) {
+		return false;
 	}
 	
 	@Override

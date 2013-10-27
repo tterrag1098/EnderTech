@@ -6,13 +6,14 @@ import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import zephraph.endertech.block.BaseBlock;
 import zephraph.endertech.block.BlockWorkbench;
+import zephraph.endertech.tileentity.TileWorkbench;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 
 public enum Blocks {
-	workbench(BlockWorkbench.class, "Workbench", 3500);
+	workbench(BlockWorkbench.class, TileWorkbench.class, "Workbench", 3500);
 	
 	private Class<? extends BaseBlock> blockClass;
 	private Class<? extends TileEntity> teClass;
