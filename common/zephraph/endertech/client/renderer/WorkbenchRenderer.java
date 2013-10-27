@@ -1,6 +1,9 @@
 package zephraph.endertech.client.renderer;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockHopper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.client.IItemRenderer;
@@ -41,7 +44,6 @@ public class WorkbenchRenderer extends TileEntitySpecialRenderer implements IIte
 			model.render(0f, 0f, 1f);
 		}
 		
-		
 	}
 	
 	// -- Entity Rendering -------------------------------------------------------------
@@ -51,7 +53,7 @@ public class WorkbenchRenderer extends TileEntitySpecialRenderer implements IIte
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		
-		model.render(x, y, z);
+		model.render(x, y, z + 1.0f);
 		
 		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
 	}

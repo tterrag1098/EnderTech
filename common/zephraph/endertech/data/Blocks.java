@@ -3,10 +3,12 @@ package zephraph.endertech.data;
 import java.util.logging.Level;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import zephraph.endertech.block.BaseBlock;
 import zephraph.endertech.block.BlockWorkbench;
 import zephraph.endertech.tileentity.TileWorkbench;
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -15,14 +17,16 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 public enum Blocks {
 	workbench(BlockWorkbench.class, TileWorkbench.class, "Workbench", 3500);
 	
-	private Class<? extends BaseBlock> blockClass;
+	@SuppressWarnings("rawtypes")
+	private Class blockClass;
 	private Class<? extends TileEntity> teClass;
-	private BaseBlock block;
+	private Block block;
 	private final String displayName;
 	private final int defaultID;
 	public int id;
 	
-	private Blocks(Class<? extends BaseBlock> blockClass, String displayName, int defaultID){
+	@SuppressWarnings("rawtypes")
+	private Blocks(Class blockClass, String displayName, int defaultID){
 		this.blockClass = blockClass;
 		this.displayName = displayName;
 		this.defaultID = id = defaultID;
@@ -31,14 +35,15 @@ public enum Blocks {
 		teClass = null;
 	}
 	
-	private Blocks(Class<? extends BaseBlock> blockClass, Class<? extends TileEntity> te, String displayName, int defaultID) {
+	@SuppressWarnings("rawtypes")
+	private Blocks(Class blockClass, Class<? extends TileEntity> te, String displayName, int defaultID) {
 		this(blockClass, displayName, defaultID);
 		teClass = te;
 	}
 	
 	public void init() {
 		try {
-			block = (BaseBlock) blockClass.newInstance();
+			block = (Block) blockClass.newInstance();
 		} catch (Exception e) {
 			FMLLog.log(Level.SEVERE, e, ModInfo.name + " failed to initialize " + name());
 		} 
@@ -46,7 +51,6 @@ public enum Blocks {
 		LanguageRegistry.addName(block, displayName);
 		if( teClass != null )
 			GameRegistry.registerTileEntity(teClass, name() + "TileEntity");
-		block.init();
 	}
 	
 	public Block ref() {

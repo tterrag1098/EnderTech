@@ -1,6 +1,7 @@
 package zephraph.endertech.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
@@ -9,7 +10,7 @@ import net.minecraft.world.World;
 import zephraph.endertech.data.Blocks;
 import zephraph.endertech.tileentity.TileWorkbench;
 
-public class BlockWorkbench extends BaseBlock {
+public class BlockWorkbench extends BlockContainer {
 
 	public BlockWorkbench() {
 		super(Blocks.workbench.id, Material.wood);
@@ -18,10 +19,6 @@ public class BlockWorkbench extends BaseBlock {
 		setUnlocalizedName(Blocks.workbench.name());
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		setCreativeTab(CreativeTabs.tabBlock);
-	}
-
-	@Override
-	public void init() {	
 	}
 	
 	@Override
@@ -47,6 +44,11 @@ public class BlockWorkbench extends BaseBlock {
 	@Override
 	public TileEntity createTileEntity(World world, int metadata) {
 		return new TileWorkbench();
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World world) {
+		return null;
 	}
 	
 
